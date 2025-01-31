@@ -1,0 +1,148 @@
+.work-experience-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #000000;
+    position: relative;
+}
+
+.section-title {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    font-family: "Anton", sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.timeline {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #9370db, #6a5acd);
+    transform: translateX(-50%);
+}
+
+.experience-card {
+    position: relative;
+    width: 45%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: visible;
+}
+
+.experience-card:nth-child(odd) {
+    left: -10%;
+}
+
+.experience-card:nth-child(even) {
+    left: 60%;
+}
+
+.experience-card:hover {
+    transform: scale(1.5);
+    box-shadow: 0 10px 20px rgba(147, 112, 219, 0.3);
+    border: 2px solid rgba(147, 112, 219, 0.6);
+    cursor: pointer;
+}
+
+.company-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.job-details {
+    text-align: center;
+}
+
+.job-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #fff;
+    font-family: "Anton", sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.company-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #dcdcdc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.job-description {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+/* Growing Dot */
+.timeline-dot {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(186, 146, 255, 1) 20%, rgba(147, 112, 219, 1) 80%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(186, 146, 255, 0.8), 
+                0 0 20px rgba(186, 146, 255, 0.6);
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+  
+.experience-card:nth-of-type(odd) .timeline-dot {
+    left: 117%;
+}
+
+.experience-card:nth-of-type(even) .timeline-dot {
+    left: -23%;
+}
+.experience-card:hover .timeline-dot {
+    transform: scale(1.5);
+    box-shadow: 0 0 15px rgba(186, 146, 255, 1), 
+                0 0 30px rgba(186, 146, 255, 0.8),
+                0 0 45px rgba(186, 146, 255, 0.6);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(186, 146, 255, 0.6), 
+                    0 0 20px rgba(186, 146, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(186, 146, 255, .8), 
+                    0 0 30px rgba(186, 146, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(186, 146, 255, 0.6), 
+                    0 0 20px rgba(186, 146, 255, 0.4);
+    }
+}
+
+.timeline-dot {
+    animation: pulse 2s infinite alternate;
+}

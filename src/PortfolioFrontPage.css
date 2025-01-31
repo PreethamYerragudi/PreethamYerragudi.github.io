@@ -1,0 +1,552 @@
+/* PortfolioFrontPage.css */
+
+/* Base Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    overflow-x: hidden;
+  }
+  
+  /* Interactive Background */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.2), rgba(0, 0, 0, 0) 60%);
+    animation: pulse 5s infinite;
+    z-index: -2;
+  }
+
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  /* Headings and Text */
+  .main-heading {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-family: "Anton", serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  .main-heading2 {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-family: "Anton", serif;
+    font-weight: 800;
+    font-style: normal;
+    margin-left: 10%;
+  }
+  
+  .name{
+    color: #9370db;
+  }
+
+  .sub-heading {
+    font-size: 1.25rem;
+    font-family: "Bubblegum Sans", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 20px;
+    margin-bottom: 1.5rem;
+  }
+  
+  
+  
+  /* Social Icons */
+  .social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .icon {
+    font-size: 2rem;
+    color: #b3b3b3;
+    transition: color 0.3s ease;
+  }
+  
+  .icon:hover {
+    color: #9370db;
+  }
+  
+  /* Call to Action Button */
+  .button-container {
+    margin-top: 2rem;
+  }
+  
+  .cta-button {
+    background-color: #6a0dad;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #7b2cbf;
+    transform: scale(1.05);
+  }
+  
+  .cta-button:active {
+    background-color: #5c009d;
+    transform: scale(0.95);
+  }/* Dots Styling */
+  
+  body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(75, 0, 130, 0.2) 60%);
+    z-index: -1;
+  }
+  .portfolio-container {
+    /* border-radius: 10%; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color: #ffffff;
+  }
+  /* Enhanced Overview Section */
+  .overview-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    gap: 2rem;
+}
+
+.text-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.image-container {
+    flex: 1;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-image {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    
+}
+
+.profile-image:hover{
+  transform: scale(1.04);
+  box-shadow: 0 10px 20px rgba(147, 112, 219, 0.3);
+  border: 2px solid rgba(147, 112, 219, 0.6);
+}
+
+.description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ffffff;
+    margin-left: 10%;
+}
+
+  
+  /* Arrow disappears */
+  .bouncing-arrow {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bouncing-arrow .arrow {
+    width: 30px;
+    height: 30px;
+    border-left: 5px solid rgba(255, 255, 255, 0.8);
+    border-bottom: 5px solid rgba(255, 255, 255, 0.8);
+    transform: rotate(315deg);
+  }
+  
+  .bouncing-arrow.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+  }
+/* For the main section */
+.software-projects-container {
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #000000; /* Dark background for consistency */
+}
+
+/* Styling for the gallery container */
+/* Styling for the gallery container */
+.projects-gallery {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to the next row */
+  justify-content: center;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+/* Each project card */
+.project-card {
+  width: 425px; /* Fixed width to prevent shrinking */
+  flex: 0 1 425px; /* Prevents shrinking while allowing wrapping */
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1d1d1d, #2b2b2b);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive behavior: When screen width reduces, projects drop to next row */
+@media (max-width: 850px) { 
+  .projects-gallery {
+    justify-content: center;
+  }
+}
+
+
+/* On hover, scale up with glowing effect */
+.project-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(186, 146, 255, 0.3);
+  border: 1px solid rgba(186, 146, 255, 0.6);
+  cursor: pointer;
+}
+
+/* Project card image styling */
+.project-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 3px solid #6a5acd;
+  border-radius: 10px 10px 0 0;
+  filter: brightness(0.8);
+  transition: filter 0.3s ease;
+  transition: height 0.5s ease;
+}
+
+/* On hover, brighten image */
+.project-card:hover .project-image {
+  filter: brightness(1);
+  height: 200px;
+}
+
+/* Project information section */
+.project-info {
+  padding: 20px;
+  color: #fff;
+}
+
+/* Project title and description */
+.project-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "Anton", sans-serif;
+  transition: font-size 0.5s ease;
+}
+
+.project-description {
+  text-align: left;
+  padding-left: 20px;
+  list-style-type: "🚀 "; /* Custom bullet points */
+  color: #ddd;
+}
+
+.project-description li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover strong {
+  color: #9370db; /* Soft lavender-purple */
+  text-shadow: 0 0 8px rgba(147, 112, 219, 0.4), 
+               0 0 12px rgba(186, 146, 255, 0.3);
+  transition: text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+
+
+.project-description strong {
+  color: #9370db; /* Highlights important words */
+  font-weight: bold;
+}
+
+/* Glowing border effect on hover */
+.project-card:hover .project-title {
+  font-size: 1.5rem;
+}
+
+.github-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 50px;
+  background: linear-gradient(145deg, #4b0082, #1a1a1a); /* Purple to black gradient */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  margin: 20px auto 0; /* Centers within the project card */
+}
+
+/* GitHub logo styling */
+.github-button img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* Makes the logo white */
+  transition: filter 0.3s ease;
+}
+
+/* Hover effect */
+.github-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(147, 112, 219, 0.4);
+  border: 2px solid rgba(147, 112, 219, 0.6);
+  background: linear-gradient(145deg, #5a009d, #222222); /* Brighter purple on hover */
+}
+
+.github-button:hover img {
+  filter: brightness(1.2) invert(1);
+}
+
+/* Active (click) effect */
+.github-button:active {
+  transform: scale(0.95);
+}
+
+/* Contact Me Section */
+.contact-container {
+  padding: 80px 20px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.contact-content {
+  display: flex;
+  justify-content: center;  /* Centering horizontally */
+  align-items: center;      /* Centering vertically */
+  flex-wrap: wrap;  
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.contact-card {
+  background: linear-gradient(145deg, #1d1d1d, #2b2b2b);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(147, 112, 219, 0.3);
+  border: 1px solid rgba(147, 112, 219, 0.6);
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  color: #9370db;
+  margin-bottom: 15px;
+}
+
+.contact-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-family: "Anton", sans-serif;
+}
+
+.contact-detail {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+}
+
+.contact-form {
+  flex: 1;
+  max-width: 500px;  /* Adjust to keep it centered */
+  background: linear-gradient(145deg, #1d1d1d, #2b2b2b);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-input,
+.form-textarea {
+  width: 95%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #9370db;
+  box-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+  outline: none;
+}
+
+.form-textarea {
+  height: 250px;
+  resize: none;
+}
+
+/* Scrolling Logos Section */
+.overflow-hidden {
+  overflow: hidden; /* Hide overflow to create a seamless scroll */
+  position: relative;
+  width: 100%; /* Ensure the container spans the full width */
+  background: linear-gradient(to right, #000000, #000000); /* Dark gradient background */
+}
+
+.flex {
+  display: flex; /* Ensure logos are in a single horizontal line */
+  align-items: center; /* Vertically center logos */
+  white-space: nowrap; /* Prevent logos from wrapping to the next line */
+  width: max-content; /* Allow the container to expand to fit all logos */
+}
+
+.scrolling-logo-container {
+  flex-shrink: 0; /* Prevent logos from shrinking */
+  padding: 0 2rem; /* Add horizontal spacing between logos */
+  width: 120px; /* Fixed width for each logo container */
+  position: relative; /* Required for hover overlay */
+  transition: transform 0.2s ease-in-out;
+}
+
+.scrolling-logo {
+  width: 60px; /* Logo fills the container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 25%;
+  object-fit: contain;
+  filter: brightness(0.8) contrast(1.2); /* Darken logos slightly */
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+/* Hover Effects */
+.scrolling-logo-container:hover .scrolling-logo {
+  filter: brightness(1.2) contrast(1.2); /* Brighten logo on hover */
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.scrolling-logo-container:hover .hover-overlay {
+  opacity: 1; /* Show glowing overlay on hover */
+}
+
+/* Optional: Add a subtle pulse animation to the glow */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+.scrolling-logo-container:hover .hover-overlay {
+  animation: pulse 2s infinite ease-in-out; /* Add pulse animation */
+}
+
+.form-button {
+  background: linear-gradient(145deg, #6a0dad, #4b0082);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-button:hover {
+  background: linear-gradient(145deg, #7b2cbf, #5a009d);
+  transform: scale(1.05);
+}
+
+.form-button:active {
+  transform: scale(0.95);
+}
