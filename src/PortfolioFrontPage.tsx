@@ -21,10 +21,9 @@ import robotics from './assets/columbus_robotics_logo.jpeg'
 import GenMart from './assets/general_mart_logo.png'
 import MagmaRush from './assets/MagmaRushLogo.png'
 import Book from './assets/book_or_trash_logo.png'
-import Me from './assets/me.jpeg'
+import Me from './assets/me.png'
 import MLImage from './assets/ml_purdue_logo.jpeg'
 import PurdueImage from './assets/Purdue.jpg'
-import MentorshipImage from './assets/me.jpeg'
 import DataScienceImage from './assets/purduedatamine_logo.jpeg'
 
 const techLogos = [
@@ -146,7 +145,10 @@ const softwareProjects = [
     },
     {
       title: "Book or Trash",
-      description: ["A description of project four. Check this out, it's awesome!"],
+      description: [
+        "Programmed a book recommendation system that utilizes <strong>machine learning</strong> concepts such as <strong>content-based<strong> and <strong>K nearest neighbor (KNN)</strong> to provide personalized book recommendations",
+        "Integrated the recommendation system with a user-friendly web interface using <strong>Flask</strong>, improving accessibility and usability"
+      ],
       image: Book,
     },
   ];
@@ -448,7 +450,7 @@ const PortfolioFrontPage = () => {
       <div className="contact-card">
         <Phone className="contact-icon" />
         <h3 className="contact-title">Phone</h3>
-        <p className="contact-detail">+1 (123) 456-7890</p>
+        <p className="contact-detail">+1 (812) 343-8802</p>
       </div>
       <div className="contact-card">
         <MapPin className="contact-icon" />
