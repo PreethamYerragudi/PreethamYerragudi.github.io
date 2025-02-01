@@ -365,6 +365,13 @@ body {
   background-color: #000000;
   color: #ffffff;
   text-align: center;
+  content: "";
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.2), rgba(0, 0, 0, 0) 60%);
+  animation: pulse 5s infinite;
+  z-index: -2;
 }
 
 .section-title {
@@ -487,6 +494,7 @@ body {
   width: 120px; /* Fixed width for each logo container */
   position: relative; /* Required for hover overlay */
   transition: transform 0.2s ease-in-out;
+  margin-bottom: 5%;
 }
 
 .scrolling-logo {

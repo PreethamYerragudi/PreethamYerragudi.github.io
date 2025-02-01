@@ -14,6 +14,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 3px;
+    text-align: center;
 }
 
 .timeline {
@@ -146,3 +147,171 @@
 .timeline-dot {
     animation: pulse 2s infinite alternate;
 }
+
+/* Education.css */
+.education-section {
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 4rem 2rem;
+  }
+  
+  .education-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .education-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .main-education {
+    text-align: center;
+  }
+  
+  .institution-with-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .institution-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #cfb991d1; /* Purple border */
+    object-fit: cover;
+    transition: width 0.4s ease-in-out, height 0.4s ease-in-out, border-color 0.4s ease-in-out;
+  }
+
+  .institution-image:hover{
+    width: 180px;
+    height:180px;
+    border-color: #cfb991;
+  }
+  
+  .institution {
+    font-size: 2.2rem;
+    background: linear-gradient(45deg,  #8e6f3e, #cfb991, #ebd99f); /* Gradient colors */
+    -webkit-background-clip: text; /* Clip text to background */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    margin-bottom: 1rem;
+    font-family: "Anton", sans-serif;
+    letter-spacing: 3px;
+    font-weight: bold;
+  }
+  
+  .details {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .highlight {
+    color: #cfb991; /* Purple accent */
+    font-weight: bold;
+  }
+  
+  .subsections {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .subsection {
+    background-color: #2c2c2c; /* Slightly lighter black */
+    padding: 1.5rem;
+    border-radius: 10px;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .subsection:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 10px rgba(207, 185, 145, 0.3);
+    border: 1px solid #cfb991;
+      
+  }
+  
+  .club-images {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .club-item {
+    text-align: center;
+  }
+  
+  .club-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #cfb991; /* Purple accent */
+    ; /* Purple border */
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    margin-top: 20%;
+    transition: transform 0.3s ease;
+  }
+  
+  .club-image:hover {
+    transform: scale(1.1);
+  }
+  
+  .subsection ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .subsection ul li {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+  
+  .subsection ul li::before {
+    color: #cfb991; /* Purple accent */
+    left: 0;
+  }
+
+  .education-section{
+    background-color: #000000;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .subsections {
+      flex-direction: column;
+    }
+  
+    .institution-with-image {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .club-images {
+      flex-direction: column;
+      align-items: center;
+    }
+
+  
+    .institution {
+      font-size: 1.8rem;
+    }
+  
+    .details {
+      font-size: 1rem;
+    }
+  
+    .subsection-title {
+      font-size: 1.3rem;
+    }
+  
+    .subsection ul li {
+      font-size: 1rem;
+    }
+  }

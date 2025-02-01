@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState} from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaTrophy, FaAward, FaMedal} from "react-icons/fa";
 
 import "./PortfolioFrontPage.css";
 import "./WorkExperience.css";
@@ -22,6 +22,10 @@ import GenMart from './assets/general_mart_logo.png'
 import MagmaRush from './assets/MagmaRushLogo.png'
 import Book from './assets/book_or_trash_logo.png'
 import Me from './assets/me.jpeg'
+import MLImage from './assets/ml_purdue_logo.jpeg'
+import PurdueImage from './assets/Purdue.jpg'
+import MentorshipImage from './assets/me.jpeg'
+import DataScienceImage from './assets/purduedatamine_logo.jpeg'
 
 const techLogos = [
     {src:HTML, alt:"HTML"},
@@ -33,6 +37,26 @@ const techLogos = [
     {src:react, alt:"React"},
     {src:django, alt:"Django"}
   ];
+
+  const awards = [
+    {
+      icon: <FaTrophy className="award-icon" />,
+      title: 'Dean’s List',
+      description: 'Fall 2022, Spring 2023',
+    },
+    {
+      icon: <FaAward className="award-icon" />,
+      title: '1st Place, Boilermaker Hackathon 2023',
+      description: 'Won first prize in the annual hackathon.',
+    },
+    {
+      icon: <FaMedal className="award-icon" />,
+      title: 'Outstanding CS Student Award 2022',
+      description: 'Recognized for academic excellence and contributions.',
+    },
+  ];
+
+  
 //   type BallProps = {
 //     textureUrl: string;
 //     position: [number, number, number];
@@ -139,7 +163,7 @@ const PortfolioFrontPage = () => {
         window.removeEventListener("scroll", handleScroll);
       };
     }, []);
-
+    const [isFlipped, setIsFlipped] = useState(false);
     
   return (
     <div>
@@ -239,6 +263,57 @@ const PortfolioFrontPage = () => {
           <img src={Me} alt="Profile" className="profile-image" />
         </motion.div>
       </div>
+{/* Education */}
+
+<motion.section
+      className="education-section"
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+      viewport={{ once: true, amount: 0.5 }} // Trigger when 50% visible
+    >
+      <div className="education-container">
+        <h2 className="section-title">College <span className="name">Education</span></h2>
+        <div className="education-content">
+          <div className="main-education">
+            <div className="institution-with-image">
+              <img src={PurdueImage} alt="Purdue University" className="institution-image" />
+              <div>
+                <h3 className="institution">Purdue University</h3>
+                <p className="details">
+                  <span className="highlight">Major:</span> Computer Science<br />
+                  <span className="highlight">Minor:</span> Statistics<br />
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="subsections">
+            <div className="subsection clubs">
+              <h4 className="subsection-title">Clubs & Organizations</h4>
+              <div className="club-images">
+              <div className="club-item">
+                  <img src={DataScienceImage} alt="The Data Mine" className="club-image" />
+                  <p>The Data Mine</p>
+                </div>
+                <div className="club-item">
+                  <img src={MLImage} alt="ML @ Purdue" className="club-image" />
+                  <p>ML @ Purdue"</p>
+                </div>
+              </div>
+            </div>
+            <div className="subsection awards">
+              <h4 className="subsection-title">Awards & Achievements</h4>
+              <ul style={{ listStyleType: 'none', paddingLeft: '0' }}>
+                <li><FaMedal style={{ marginRight: '10px', color: 'gold' }} />Dean’s List (Fall 2024)</li>
+                <li><FaMedal style={{ marginRight: '10px', color: 'gold' }} />Coca Cola Scholar Semifinalist</li>
+                <li><FaMedal style={{ marginRight: '10px', color: 'gold' }} />Elks Most Valuable Student Semifinalist</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.section>
+
      {/* Work Experience Section */}
      <motion.div 
      id="work-experience"
