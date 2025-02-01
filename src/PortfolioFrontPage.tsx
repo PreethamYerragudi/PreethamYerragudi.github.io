@@ -146,7 +146,7 @@ const softwareProjects = [
     {
       title: "Book or Trash",
       description: [
-        "Programmed a book recommendation system that utilizes <strong>machine learning</strong> concepts such as <strong>content-based<strong> and <strong>K nearest neighbor (KNN)</strong> to provide personalized book recommendations",
+        "Programmed a book recommendation system that utilizes <strong>machine learning</strong> concepts such as <strong>content-based</strong> and <strong>K nearest neighbor (KNN)</strong> to provide personalized book recommendations",
         "Integrated the recommendation system with a user-friendly web interface using <strong>Flask</strong>, improving accessibility and usability"
       ],
       image: Book,
