@@ -5,17 +5,33 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import "./PortfolioFrontPage.css";
 import "./WorkExperience.css";
 import { Mail, Phone, MapPin } from "lucide-react";
-
+import showdownIcon from './assets/showdown_icon.png';
+import HTML from './assets/HTML.png';
+import CSS from './assets/CSS.png';
+import JS from './assets/JS.png';
+import typescript from './assets/typescript.svg';
+import Java from './assets/Java.png';
+import python from './assets/python.png';
+import react from './assets/react.png';
+import django from './assets/django.svg';
+import IntelliSavvy from './assets/IntelliSavvyLogo.jpeg'
+import VIP from './assets/purdue_vip_logo.jpeg'
+import IU from './assets/IU_logo.jpeg'
+import robotics from './assets/columbus_robotics_logo.jpeg'
+import GenMart from './assets/general_mart_logo.png'
+import MagmaRush from './assets/MagmaRushLogo.png'
+import Book from './assets/book_or_trash_logo.png'
+import Me from './assets/me.jpeg'
 
 const techLogos = [
-    {src:"HTML.png", alt:"HTML"},
-    {src:"CSS.png", alt:"CSS"},
-    {src:"JS.png", alt:"JavaScript"},
-    {src:"typescript.svg", alt:"TypeScript"},
-    {src:"Java.png", alt:"Java"},
-    {src:"python.png", alt:"Python"},
-    {src:"react.png", alt:"React"},
-    {src:"django.svg", alt:"Django"}
+    {src:HTML, alt:"HTML"},
+    {src:CSS, alt:"CSS"},
+    {src:JS, alt:"JavaScript"},
+    {src:typescript, alt:"TypeScript"},
+    {src:Java, alt:"Java"},
+    {src:python, alt:"Python"},
+    {src:react, alt:"React"},
+    {src:django, alt:"Django"}
   ];
 //   type BallProps = {
 //     textureUrl: string;
@@ -57,25 +73,25 @@ const workExperience = [
     title: "Software Engineer Intern",
     company: "IntelliSavvy",
     date: "January 2025 - Present",
-    logo: "src/assets/IntelliSavvyLogo.jpeg",
+    logo: IntelliSavvy,
   },
   {
     title: "Undergraduate Student Researcher ",
     company: "Video and Image Processing Laboratory (VIPER), Purdue University",
     date: "August 2024 - December 2024",
-    logo: "src/assets/purdue_vip_logo.jpeg",
+    logo: VIP,
   },
   {
     title: "Research Assistant",
     company: "Computer Vision Lab, Indiana University Bloomington ",
     date: "2022 - 2024",
-    logo: "src/assets/IU_logo.jpeg",
+    logo: IU,
   },
   {
     title: "Lead Software Engineer",
     company: "FIRST Robotics Competition Team 4926",
     date: "Summer 2025",
-    logo: "src/assets/columbus_robotics_logo.jpeg",
+    logo: robotics,
   },
 ];
 
@@ -86,7 +102,7 @@ const softwareProjects = [
         "Developed a competitive Pokemon AI agent achieving a <strong>60% win rate</strong> by leveraging advanced reinforcement learning techniques, including <strong>Deep Q-Networks (DQN)</strong> and <strong>Policy Gradient</strong> methods.",
         "Leveraged the <strong>Poke-env API</strong> and <strong>Node.js</strong> to configure a <strong>Pokemon Showdown</strong> server for automated data collection and game simulations, accelerating model training and evaluation."
       ],
-      image: "src/assets/showdown_icon.png",
+      image: showdownIcon,
     },
     {
       title: "General Mart",
@@ -94,7 +110,7 @@ const softwareProjects = [
         "Developed a dynamic marketplace website by utilizing <strong>Django</strong> and <strong>SQLite</strong> resulting in real-time item updates, seamless user authentication, and robust database implementation",
         "Designed an intuitive frontend using <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>, incorporating the <strong>Bootstrap</strong> framework to enhance website functionality, aesthetics, and dynamic interactivity"
       ],
-      image: "src/assets/general_mart_logo.png",
+      image: GenMart,
     },
     {
       title: "Magma Rush",
@@ -102,12 +118,12 @@ const softwareProjects = [
         "Devised a complete <strong>IOS mobile game</strong> using <strong>Unity</strong> and <strong>Swift</strong>, ensuring seamless cross-device integration and performance optimization leading to <strong>100+</strong> downloads from <strong>4 different countries</strong>",
         "Programmed complex mechanics such as <strong>AI-driven</strong> NPC behavior using <strong>C#</strong> to create an engaging game play"
       ],
-      image: "src/assets/MagmaRushLogo.png",
+      image: MagmaRush,
     },
     {
       title: "Book or Trash",
       description: ["A description of project four. Check this out, it's awesome!"],
-      image: "src/assets/book_or_trash_logo.png",
+      image: Book,
     },
   ];
 
@@ -220,7 +236,7 @@ const PortfolioFrontPage = () => {
           transition={{ duration: 0.8 }} 
           viewport={{ once: true }}
         >
-          <img src="src/assets/me.jpeg" alt="Profile" className="profile-image" />
+          <img src={Me} alt="Profile" className="profile-image" />
         </motion.div>
       </div>
      {/* Work Experience Section */}
@@ -326,7 +342,7 @@ const PortfolioFrontPage = () => {
         whileHover={{ scale: 1.1, transition: { duration: 0.2 } }} // Hover effect
       >
         <img
-          src={"src/assets/" + logo.src}
+          src={logo.src}
           alt={logo.alt}
           className="scrolling-logo"
         />
