@@ -126,6 +126,7 @@ const softwareProjects = [
         "Leveraged the <strong>Poke-env API</strong> and <strong>Node.js</strong> to configure a <strong>Pokemon Showdown</strong> server for automated data collection and game simulations, accelerating model training and evaluation."
       ],
       image: showdownIcon,
+      link: "https://github.com/PreethamYerragudi/PokeRL"
     },
     {
       title: "General Mart",
@@ -134,6 +135,7 @@ const softwareProjects = [
         "Designed an intuitive frontend using <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>, incorporating the <strong>Bootstrap</strong> framework to enhance website functionality, aesthetics, and dynamic interactivity"
       ],
       image: GenMart,
+      link: "https://github.com/PreethamYerragudi/General-Mart"
     },
     {
       title: "Magma Rush",
@@ -142,6 +144,7 @@ const softwareProjects = [
         "Programmed complex mechanics such as <strong>AI-driven</strong> NPC behavior using <strong>C#</strong> to create an engaging game play"
       ],
       image: MagmaRush,
+      link: "https://github.com/PreethamYerragudi/Magma-Rush"
     },
     {
       title: "Book or Trash",
@@ -150,6 +153,7 @@ const softwareProjects = [
         "Integrated the recommendation system with a user-friendly web interface using <strong>Flask</strong>, improving accessibility and usability"
       ],
       image: Book,
+      link: "https://github.com/PreethamYerragudi/Book-Recommendation-Engine"
     },
   ];
 
@@ -393,7 +397,7 @@ const PortfolioFrontPage = () => {
                     <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
                     ))}
                 </ul>
-                <a href="https://github.com/yourusername" target="_blank" className="github-button">
+                <a href={project.link} target="_blank" className="github-button">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub Logo" />
 </a>
               </div>
