@@ -113,7 +113,7 @@ const workExperience = [
   {
     title: "Lead Software Engineer",
     company: "FIRST Robotics Competition Team 4926",
-    date: "Summer 2025",
+    date: "Jnauary 2021 - May 2024",
     logo: robotics,
   },
 ];
