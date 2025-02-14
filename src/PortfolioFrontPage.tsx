@@ -25,6 +25,7 @@ import Me from './assets/me.png'
 import MLImage from './assets/ml_purdue_logo.jpeg'
 import PurdueImage from './assets/Purdue.jpg'
 import DataScienceImage from './assets/purduedatamine_logo.jpeg'
+import OneAmerica from './assets/OneAmericaLogo.png'
 
 const techLogos = [
     {src:HTML, alt:"HTML"},
@@ -92,6 +93,12 @@ const techLogos = [
 //   }
   
 const workExperience = [
+  {
+    title: "Incoming Data Engineer Intern",
+    company: "OneAmerica Financial",
+    date: "",
+    logo: OneAmerica,
+  },
   {
     title: "Software Engineer Intern",
     company: "IntelliSavvy",
