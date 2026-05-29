@@ -49,10 +49,16 @@ function App() {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+            // Stagger children
+            const children = entry.target.querySelectorAll('.reveal-child')
+            children.forEach((child, i) => {
+              ;(child as HTMLElement).style.transitionDelay = `${i * 0.15}s`
+              child.classList.add('child-visible')
+            })
           }
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
     document.querySelectorAll('.education, .section').forEach(el => observer.observe(el))
     return () => observer.disconnect()
@@ -181,62 +187,71 @@ function App() {
       </div>
 
       <section id="education" className="education">
-        <h2 className="section-title">Education</h2>
+        <h2 className="section-title reveal-child">Education</h2>
 
-        <div className="edu-hero-card">
+        <div className="edu-hero-card reveal-child">
           <div className="edu-img-placeholder">
             <span>Campus Photo</span>
           </div>
           <div className="edu-hero-info">
             <h3>Purdue University</h3>
             <p>Computer Science</p>
+            <p className="edu-courses">DS&A · Systems Programming · OS · Software Engineering · Databases · Computer Architecture</p>
           </div>
         </div>
 
         <div className="edu-gallery">
-          <div className="edu-tile">
-            <div className="edu-tile-img">
-              <span>Coursework</span>
-            </div>
-            <h4>Key Courses</h4>
-          </div>
-          <div className="edu-tile">
-            <div className="edu-tile-img">
-              <span>Clubs</span>
-            </div>
+          <div className="edu-clubs-card reveal-child">
             <h4>Organizations</h4>
-          </div>
-          <div className="edu-tile">
-            <div className="edu-tile-img">
-              <span>Projects</span>
+            <div className="clubs-grid">
+              <div className="club-item">
+                <div className="club-logo" />
+                <span>Purdue Hackers</span>
+              </div>
+              <div className="club-item">
+                <div className="club-logo" />
+                <span>ACM</span>
+              </div>
+              <div className="club-item">
+                <div className="club-logo" />
+                <span>Blockchain</span>
+              </div>
             </div>
-            <h4>Hackathons</h4>
+          </div>
+          <div className="edu-awards-card reveal-child">
+            <h4>Awards</h4>
+            <ul className="awards-list">
+              <li>🎗️ Dean's List</li>
+              <li>🎗️ Hackathon Winner</li>
+              <li>🎗️ CS Scholarship</li>
+              <li>🎗️ Research Grant</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <section id="experience" className="section">
-        <h2 className="section-title">Experience</h2>
+        <h2 className="section-title reveal-child">Experience</h2>
         <div className="placeholder-content">
-          <div className="placeholder-card" />
-          <div className="placeholder-card" />
-          <div className="placeholder-card" />
+          <div className="placeholder-card reveal-child" />
+          <div className="placeholder-card reveal-child" />
+          <div className="placeholder-card reveal-child" />
         </div>
       </section>
 
       <section id="projects" className="section">
-        <h2 className="section-title">Projects</h2>
+        <h2 className="section-title reveal-child">Projects</h2>
         <div className="placeholder-content">
-          <div className="placeholder-card" />
-          <div className="placeholder-card" />
-          <div className="placeholder-card" />
+          <div className="placeholder-card reveal-child" />
+          <div className="placeholder-card reveal-child" />
+          <div className="placeholder-card reveal-child" />
         </div>
       </section>
 
       <section id="contact" className="section">
-        <h2 className="section-title">Contact</h2>
+        <h2 className="section-title reveal-child">Contact</h2>
         <div className="placeholder-content">
-          <div className="placeholder-card wide" />
+          <div className="placeholder-card wide reveal-child" />
         </div>
       </section>
     </div>

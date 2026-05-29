@@ -304,15 +304,7 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 6rem 2rem;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.education.visible {
-  opacity: 1;
-  transform: translateY(0);
+  padding: 8rem 2rem;
 }
 
 .section-title {
@@ -362,9 +354,16 @@
   font-size: 0.95rem;
 }
 
+.edu-courses {
+  margin-top: 0.5rem;
+  font-size: 0.85rem !important;
+  color: #6b7280 !important;
+  letter-spacing: 0.3px;
+}
+
 .edu-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
@@ -374,11 +373,101 @@
   }
 }
 
+.edu-clubs-card {
+  border-radius: 12px;
+  border: 1px solid rgba(207, 185, 100, 0.12);
+  background: linear-gradient(160deg, rgba(15, 15, 18, 0.95), rgba(25, 22, 15, 0.9));
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edu-clubs-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #cfb964;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.clubs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem 2rem;
+  align-content: center;
+}
+
+.club-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.club-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #2a2520, #141414);
+  border: 2px solid rgba(207, 185, 100, 0.3);
+  box-shadow: 0 0 12px rgba(207, 185, 100, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.club-item:hover .club-logo {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(207, 185, 100, 0.25);
+}
+
+.club-item span {
+  font-size: 0.8rem;
+  color: #d1d5db;
+  text-align: center;
+  font-weight: 500;
+}
+
 .edu-tile {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(207, 185, 100, 0.12);
   transition: transform 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-awards-card {
+  border-radius: 12px;
+  border: 1px solid rgba(207, 185, 100, 0.12);
+  background: linear-gradient(160deg, rgba(15, 15, 18, 0.95), rgba(25, 22, 15, 0.9));
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-awards-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #cfb964;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.awards-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.awards-list li {
+  font-size: 0.9rem;
+  color: #d1d5db;
 }
 
 .edu-tile:hover {
@@ -388,7 +477,7 @@
 
 .edu-tile-img {
   width: 100%;
-  height: 160px;
+  flex: 1;
   background: linear-gradient(160deg, #141414 0%, #1f1c17 100%);
   display: flex;
   align-items: center;
@@ -416,13 +505,17 @@
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 6rem 2rem;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  padding: 8rem 2rem;
 }
 
-.section.visible {
+/* Staggered child reveal */
+.reveal-child {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-child.child-visible {
   opacity: 1;
   transform: translateY(0);
 }
