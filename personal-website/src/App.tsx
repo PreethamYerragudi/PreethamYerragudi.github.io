@@ -1,8 +1,62 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+
+const sections = [
+  { id: 'home', label: 'Home' },
+  { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+]
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
+  const scrollProgress = useRef(0)
+  const [pastHero, setPastHero] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    const onScroll = () => {
+      const maxScroll = window.innerHeight
+      const progress = Math.min(window.scrollY / maxScroll, 1)
+      scrollProgress.current = progress
+
+      setPastHero(window.scrollY > maxScroll * 0.8)
+
+      // Determine active section
+      let current = 'home'
+      for (const s of sections) {
+        const el = document.getElementById(s.id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) {
+          current = s.id
+        }
+      }
+      setActiveSection(current)
+
+      if (heroRef.current) {
+        heroRef.current.style.opacity = `${1 - progress}`
+        heroRef.current.style.transform = `translateY(${progress * -60}px) scale(${1 - progress * 0.05})`
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        }
+      },
+      { threshold: 0.15 }
+    )
+    document.querySelectorAll('.education, .section').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -34,6 +88,11 @@ function App() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const t = scrollProgress.current
+      // Interpolate purple (168,85,247) -> gold (207,185,100)
+      const r = Math.round(168 + (207 - 168) * t)
+      const g = Math.round(85 + (185 - 85) * t)
+      const b = Math.round(247 + (100 - 247) * t)
 
       // Draw connections
       for (let i = 0; i < particles.length; i++) {
@@ -43,7 +102,7 @@ function App() {
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < 150) {
             ctx.beginPath()
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 * (1 - dist / 150)})`
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.15 * (1 - dist / 150)})`
             ctx.lineWidth = 0.5
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
@@ -61,7 +120,7 @@ function App() {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(168, 85, 247, ${p.alpha})`
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`
         ctx.fill()
       }
 
@@ -80,13 +139,30 @@ function App() {
       <canvas ref={canvasRef} className="bg-canvas" aria-hidden="true" />
       <div className="grid-overlay" aria-hidden="true" />
 
-      <nav className="nav">
+      <nav className={`nav ${pastHero ? 'nav-hidden' : ''}`}>
         <a href="#about">About</a>
         <a href="#work">Work</a>
         <a href="#contact">Contact</a>
       </nav>
 
-      <main className="hero">
+      <nav className={`timeline-nav ${pastHero ? 'timeline-visible' : ''}`} aria-label="Section navigation">
+        <div className="timeline-line" aria-hidden="true" />
+        {sections.map(s => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            className={`timeline-dot ${activeSection === s.id ? 'active' : ''}`}
+          >
+            <span className="dot" />
+            <span className="timeline-label">{s.label}</span>
+          </a>
+        ))}
+      </nav>
+
+      <main id="home" ref={heroRef} className="hero">
+        <div className="hero-avatar">
+          <div className="avatar-placeholder" />
+        </div>
         <div className="hero-badge">Software Engineer</div>
         <h1>
           Hi, I'm <span className="accent">Preetham</span>
@@ -103,6 +179,66 @@ function App() {
       <div className="scroll-indicator" aria-hidden="true">
         <div className="scroll-line" />
       </div>
+
+      <section id="education" className="education">
+        <h2 className="section-title">Education</h2>
+
+        <div className="edu-hero-card">
+          <div className="edu-img-placeholder">
+            <span>Campus Photo</span>
+          </div>
+          <div className="edu-hero-info">
+            <h3>Purdue University</h3>
+            <p>Computer Science</p>
+          </div>
+        </div>
+
+        <div className="edu-gallery">
+          <div className="edu-tile">
+            <div className="edu-tile-img">
+              <span>Coursework</span>
+            </div>
+            <h4>Key Courses</h4>
+          </div>
+          <div className="edu-tile">
+            <div className="edu-tile-img">
+              <span>Clubs</span>
+            </div>
+            <h4>Organizations</h4>
+          </div>
+          <div className="edu-tile">
+            <div className="edu-tile-img">
+              <span>Projects</span>
+            </div>
+            <h4>Hackathons</h4>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" className="section">
+        <h2 className="section-title">Experience</h2>
+        <div className="placeholder-content">
+          <div className="placeholder-card" />
+          <div className="placeholder-card" />
+          <div className="placeholder-card" />
+        </div>
+      </section>
+
+      <section id="projects" className="section">
+        <h2 className="section-title">Projects</h2>
+        <div className="placeholder-content">
+          <div className="placeholder-card" />
+          <div className="placeholder-card" />
+          <div className="placeholder-card" />
+        </div>
+      </section>
+
+      <section id="contact" className="section">
+        <h2 className="section-title">Contact</h2>
+        <div className="placeholder-content">
+          <div className="placeholder-card wide" />
+        </div>
+      </section>
     </div>
   )
 }
