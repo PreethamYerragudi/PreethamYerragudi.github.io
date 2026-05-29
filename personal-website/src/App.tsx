@@ -2,17 +2,18 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 const sections = [
-  { id: 'home', label: 'Home' },
-  { id: 'education', label: 'Education' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home', label: 'Home', color: '#a855f7' },
+  { id: 'education', label: 'Education', color: '#a855f7' },
+  { id: 'experience', label: 'Experience', color: '#a855f7' },
+  { id: 'projects', label: 'Projects', color: '#a855f7' },
+  { id: 'contact', label: 'Contact', color: '#a855f7' },
 ]
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const heroRef = useRef<HTMLElement>(null)
   const scrollProgress = useRef(0)
+  const activeSectionIndex = useRef(0)
   const [pastHero, setPastHero] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
@@ -33,6 +34,7 @@ function App() {
         }
       }
       setActiveSection(current)
+      activeSectionIndex.current = sections.findIndex(s => s.id === current)
 
       if (heroRef.current) {
         heroRef.current.style.opacity = `${1 - progress}`
@@ -92,13 +94,15 @@ function App() {
       })
     }
 
+    const sectionColors = sections.map(s => {
+      const hex = s.color
+      return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]
+    })
+
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      const t = scrollProgress.current
-      // Interpolate purple (168,85,247) -> gold (207,185,100)
-      const r = Math.round(168 + (207 - 168) * t)
-      const g = Math.round(85 + (185 - 85) * t)
-      const b = Math.round(247 + (100 - 247) * t)
+      const idx = activeSectionIndex.current
+      const [r, g, b] = sectionColors[idx]
 
       // Draw connections
       for (let i = 0; i < particles.length; i++) {
@@ -152,12 +156,24 @@ function App() {
       </nav>
 
       <nav className={`timeline-nav ${pastHero ? 'timeline-visible' : ''}`} aria-label="Section navigation">
-        <div className="timeline-line" aria-hidden="true" />
+        <div className="timeline-line" aria-hidden="true">
+          <div
+            className="timeline-progress"
+            style={{
+              height: `${(sections.findIndex(s => s.id === activeSection) / (sections.length - 1)) * 100}%`,
+              background: sections.find(s => s.id === activeSection)?.color,
+              boxShadow: `0 0 8px ${sections.find(s => s.id === activeSection)?.color}99`,
+            }}
+          />
+        </div>
         {sections.map(s => (
           <a
             key={s.id}
             href={`#${s.id}`}
             className={`timeline-dot ${activeSection === s.id ? 'active' : ''}`}
+            style={{
+              '--dot-color': s.color,
+            } as React.CSSProperties}
           >
             <span className="dot" />
             <span className="timeline-label">{s.label}</span>
@@ -232,10 +248,37 @@ function App() {
 
       <section id="experience" className="section">
         <h2 className="section-title reveal-child">Experience</h2>
-        <div className="placeholder-content">
-          <div className="placeholder-card reveal-child" />
-          <div className="placeholder-card reveal-child" />
-          <div className="placeholder-card reveal-child" />
+        <div className="exp-timeline">
+          <div className="exp-item reveal-child">
+            <div className="exp-logo" />
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <span className="exp-date">Summer 2025</span>
+              <h3>Company Name</h3>
+              <p>Software Engineer Intern</p>
+              <p className="exp-desc">Built scalable microservices and improved API response times by 40%. Collaborated with cross-functional teams to deliver features on schedule.</p>
+            </div>
+          </div>
+          <div className="exp-item reveal-child">
+            <div className="exp-logo" />
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <span className="exp-date">Summer 2024</span>
+              <h3>Company Name</h3>
+              <p>Software Engineer Intern</p>
+              <p className="exp-desc">Developed full-stack features using React and Node.js. Designed and implemented a real-time data pipeline processing millions of events daily.</p>
+            </div>
+          </div>
+          <div className="exp-item reveal-child">
+            <div className="exp-logo" />
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <span className="exp-date">Summer 2023</span>
+              <h3>Company Name</h3>
+              <p>Software Engineer Intern</p>
+              <p className="exp-desc">Created internal tooling that reduced deployment time by 60%. Wrote comprehensive unit and integration tests for critical services.</p>
+            </div>
+          </div>
         </div>
       </section>
 
