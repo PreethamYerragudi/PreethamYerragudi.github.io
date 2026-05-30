@@ -125,7 +125,8 @@ function App() {
     if (!ctx) return
 
     let animationId: number
-    const particles: { x: number; y: number; vx: number; vy: number; size: number; alpha: number }[] = []
+    const stars: { x: number; y: number; size: number; alpha: number; twinkleSpeed: number; phase: number }[] = []
+    const shootingStars: { x: number; y: number; len: number; speed: number; alpha: number; angle: number; life: number; maxLife: number }[] = []
 
     const resize = () => {
       canvas.width = window.innerWidth
@@ -134,15 +135,29 @@ function App() {
     resize()
     window.addEventListener('resize', resize)
 
-    // Create particles
-    for (let i = 0; i < 80; i++) {
-      particles.push({
+    // Create static stars
+    for (let i = 0; i < 150; i++) {
+      stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.2,
+        size: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.4 + 0.6,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        phase: Math.random() * Math.PI * 2,
+      })
+    }
+
+    const spawnShootingStar = () => {
+      const angle = Math.random() * 0.4 + 0.3
+      shootingStars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height * 0.5,
+        len: Math.random() * 80 + 40,
+        speed: Math.random() * 4 + 3,
+        alpha: 1,
+        angle,
+        life: 0,
+        maxLife: Math.random() * 80 + 60,
       })
     }
 
@@ -151,38 +166,55 @@ function App() {
       return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]
     })
 
+    let frame = 0
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const idx = activeSectionIndex.current
       const [r, g, b] = sectionColors[idx]
+      frame++
 
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 150) {
-            ctx.beginPath()
-            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.15 * (1 - dist / 150)})`
-            ctx.lineWidth = 0.5
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.stroke()
-          }
-        }
+      // Spawn shooting stars only on homepage
+      if (frame % 240 === 0 && (scrollProgress.current < 0.8 || activeSectionIndex.current === sections.length - 1)) spawnShootingStar()
+
+      // Draw twinkling stars
+      for (const s of stars) {
+        const twinkle = Math.sin(frame * s.twinkleSpeed + s.phase) * 0.3 + 0.7
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${s.alpha * twinkle})`
+        ctx.fill()
       }
 
-      // Draw and update particles
-      for (const p of particles) {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1
+      // Draw shooting stars
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const ss = shootingStars[i]
+        ss.life++
+        ss.x += Math.cos(ss.angle) * ss.speed
+        ss.y += Math.sin(ss.angle) * ss.speed
+        ss.alpha = 1 - ss.life / ss.maxLife
+
+        if (ss.life >= ss.maxLife) {
+          shootingStars.splice(i, 1)
+          continue
+        }
+
+        const tailX = ss.x - Math.cos(ss.angle) * ss.len
+        const tailY = ss.y - Math.sin(ss.angle) * ss.len
+        const gradient = ctx.createLinearGradient(ss.x, ss.y, tailX, tailY)
+        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${ss.alpha})`)
+        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`)
 
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`
+        ctx.moveTo(ss.x, ss.y)
+        ctx.lineTo(tailX, tailY)
+        ctx.strokeStyle = gradient
+        ctx.lineWidth = 1.5
+        ctx.stroke()
+
+        // Bright head
+        ctx.beginPath()
+        ctx.arc(ss.x, ss.y, 1.5, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255, 255, 255, ${ss.alpha})`
         ctx.fill()
       }
 
@@ -199,11 +231,11 @@ function App() {
   return (
     <div className="homepage">
       <canvas ref={canvasRef} className="bg-canvas" aria-hidden="true" />
-      <div className="grid-overlay" aria-hidden="true" />
 
       <nav className={`nav ${pastHero ? 'nav-hidden' : ''}`}>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -235,7 +267,7 @@ function App() {
 
       <main id="home" ref={heroRef} className="hero">
         <div className="hero-avatar">
-          <div className="avatar-placeholder" />
+          <img src="/profile.jpeg" alt="Preetham" className="avatar-placeholder" />
         </div>
         <div className="hero-badge">Software Engineer</div>
         <h1>
@@ -245,7 +277,7 @@ function App() {
           I build elegant, high-performance digital experiences.
         </p>
         <div className="hero-cta">
-          <a href="#work" className="btn-primary">View My Work</a>
+          <a href="#experience" className="btn-primary">View My Work</a>
           <a href="#contact" className="btn-outline">Get In Touch</a>
         </div>
       </main>
@@ -258,9 +290,7 @@ function App() {
         <h2 className="section-title reveal-child">Education</h2>
 
         <div className="edu-hero-card reveal-child">
-          <div className="edu-img-placeholder">
-            <span>Campus Photo</span>
-          </div>
+          <img src="/purdue.jpg" className="edu-img-placeholder" alt="Purdue University campus" />
           <div className="edu-hero-info">
             <h3>Purdue University</h3>
             <p>Computer Science</p>
@@ -273,15 +303,15 @@ function App() {
             <h4>Organizations</h4>
             <div className="clubs-grid">
               <div className="club-item">
-                <div className="club-logo" />
+                <img src="/club-1.png" alt="Purdue Hackers" className="club-logo" />
                 <span>Purdue Hackers</span>
               </div>
               <div className="club-item">
-                <div className="club-logo" />
+                <img src="/club-2.png" alt="ACM" className="club-logo" />
                 <span>ACM</span>
               </div>
               <div className="club-item">
-                <div className="club-logo" />
+                <img src="/club-3.png" alt="Blockchain" className="club-logo" />
                 <span>Blockchain</span>
               </div>
             </div>
@@ -302,33 +332,87 @@ function App() {
         <h2 className="section-title reveal-child">Experience</h2>
         <div className="exp-timeline">
           <div className="exp-item reveal-child">
-            <div className="exp-logo" />
             <div className="exp-connector" />
             <div className="exp-content">
-              <span className="exp-date">Summer 2025</span>
-              <h3>Company Name</h3>
-              <p>Software Engineer Intern</p>
+              <div className="exp-header">
+                <img src="/amazon_logo.jpg" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>Amazon</h3>
+                  <p>Software Development Engineer Intern</p>
+                </div>
+                <span className="exp-date">May 2026 - August 2026</span>
+              </div>
               <p className="exp-desc">Built scalable microservices and improved API response times by 40%. Collaborated with cross-functional teams to deliver features on schedule.</p>
             </div>
           </div>
           <div className="exp-item reveal-child">
-            <div className="exp-logo" />
             <div className="exp-connector" />
             <div className="exp-content">
-              <span className="exp-date">Summer 2024</span>
-              <h3>Company Name</h3>
-              <p>Software Engineer Intern</p>
+              <div className="exp-header">
+                <img src="/company-2.png" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>Costco</h3>
+                  <p>Machine Learning Researcher</p>
+                </div>
+                <span className="exp-date">August 2025 - December 2025</span>
+              </div>
               <p className="exp-desc">Developed full-stack features using React and Node.js. Designed and implemented a real-time data pipeline processing millions of events daily.</p>
             </div>
           </div>
           <div className="exp-item reveal-child">
-            <div className="exp-logo" />
             <div className="exp-connector" />
             <div className="exp-content">
-              <span className="exp-date">Summer 2023</span>
-              <h3>Company Name</h3>
-              <p>Software Engineer Intern</p>
+              <div className="exp-header">
+                <img src="/company-3.png" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>OneAmerica Financial</h3>
+                  <p>Data Engineering Intern</p>
+                </div>
+                <span className="exp-date">May 2025 - December 2025</span>
+              </div>
               <p className="exp-desc">Created internal tooling that reduced deployment time by 60%. Wrote comprehensive unit and integration tests for critical services.</p>
+            </div>
+          </div>
+          <div className="exp-item reveal-child">
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <div className="exp-header">
+                <img src="/company-4.png" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>Indiana University</h3>
+                  <p>Research Assistant</p>
+                </div>
+                <span className="exp-date">Spring 2023</span>
+              </div>
+              <p className="exp-desc">Description of work completed at this role.</p>
+            </div>
+          </div>
+          <div className="exp-item reveal-child">
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <div className="exp-header">
+                <img src="/company-5.png" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>Company Name</h3>
+                  <p>Software Engineer Intern</p>
+                </div>
+                <span className="exp-date">Summer 2022</span>
+              </div>
+              <p className="exp-desc">Description of work completed at this role.</p>
+            </div>
+          </div>
+          <div className="exp-item reveal-child">
+            <div className="exp-connector" />
+            <div className="exp-content">
+              <div className="exp-header">
+                <img src="/company-6.png" alt="Company" className="exp-logo" />
+                <div>
+                  <h3>Company Name</h3>
+                  <p>Software Engineer Intern</p>
+                </div>
+                <span className="exp-date">Spring 2022</span>
+              </div>
+              <p className="exp-desc">Description of work completed at this role.</p>
             </div>
           </div>
         </div>
