@@ -97,24 +97,17 @@ function App() {
       resumeTimeout = window.setTimeout(() => { autoScrollPaused.current = false }, 500)
     }
 
-    const onPointerEnter = () => { autoScrollPaused.current = true }
-    const onPointerLeave = () => { scheduleResume() }
-    const onWheel = () => { autoScrollPaused.current = true; scheduleResume() }
+    const onMouseDown = () => { autoScrollPaused.current = true }
+    const onMouseUp = () => { scheduleResume() }
 
-    gallery.addEventListener('pointerenter', onPointerEnter)
-    gallery.addEventListener('pointerleave', onPointerLeave)
-    gallery.addEventListener('wheel', onWheel, { passive: true })
-    gallery.addEventListener('touchstart', onPointerEnter)
-    gallery.addEventListener('touchend', onPointerLeave)
+    gallery.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mouseup', onMouseUp)
 
     return () => {
       cancelAnimationFrame(rafId)
       clearTimeout(resumeTimeout)
-      gallery.removeEventListener('pointerenter', onPointerEnter)
-      gallery.removeEventListener('pointerleave', onPointerLeave)
-      gallery.removeEventListener('wheel', onWheel)
-      gallery.removeEventListener('touchstart', onPointerEnter)
-      gallery.removeEventListener('touchend', onPointerLeave)
+      gallery.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mouseup', onMouseUp)
     }
   }, [])
 
@@ -303,16 +296,16 @@ function App() {
             <h4>Organizations</h4>
             <div className="clubs-grid">
               <div className="club-item">
-                <img src="/club-1.png" alt="Purdue Hackers" className="club-logo" />
-                <span>Purdue Hackers</span>
+                <img src="/mlpurdue.png" alt="Purdue Hackers" className="club-logo" />
+                <span>ML @ Purdue</span>
               </div>
               <div className="club-item">
-                <img src="/club-2.png" alt="ACM" className="club-logo" />
-                <span>ACM</span>
+                <img src="/datamine.jpeg" alt="The Data Mine" className="club-logo" />
+                <span>Data Mine</span>
               </div>
               <div className="club-item">
-                <img src="/club-3.png" alt="Blockchain" className="club-logo" />
-                <span>Blockchain</span>
+                <img src="/sigapp.png" alt="Blockchain" className="club-logo" />
+                <span>Sigapp</span>
               </div>
             </div>
           </div>
@@ -330,89 +323,66 @@ function App() {
 
       <section id="experience" className="section">
         <h2 className="section-title reveal-child">Experience</h2>
-        <div className="exp-timeline">
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/amazon_logo.jpg" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>Amazon</h3>
-                  <p>Software Development Engineer Intern</p>
-                </div>
-                <span className="exp-date">May 2026 - August 2026</span>
-              </div>
-              <p className="exp-desc">Built scalable microservices and improved API response times by 40%. Collaborated with cross-functional teams to deliver features on schedule.</p>
+        <div className="exp-timeline-blocks">
+          <div className="exp-center-line" aria-hidden="true" />
+
+          <div className="exp-block exp-left reveal-child">
+            <div className="exp-block-card">
+              <img src="/amazon.jpg" alt="Amazon" className="exp-block-logo" />
+              <h3 className="exp-block-title">Software Development Engineer Intern</h3>
+              <p className="exp-block-company">Amazon</p>
+              <p className="exp-block-date">May 2026 - August 2026</p>
+            </div>
+            <div className="exp-block-dot" />
+          </div>
+
+          <div className="exp-block exp-right reveal-child">
+            <div className="exp-block-dot" />
+            <div className="exp-block-card">
+              <img src="/costco.png" alt="Costco" className="exp-block-logo" />
+              <h3 className="exp-block-title">Machine Learning Researcher</h3>
+              <p className="exp-block-company">Costco</p>
+              <p className="exp-block-date">August 2025 - December 2025</p>
             </div>
           </div>
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/company-2.png" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>Costco</h3>
-                  <p>Machine Learning Researcher</p>
-                </div>
-                <span className="exp-date">August 2025 - December 2025</span>
-              </div>
-              <p className="exp-desc">Developed full-stack features using React and Node.js. Designed and implemented a real-time data pipeline processing millions of events daily.</p>
+
+          <div className="exp-block exp-left reveal-child">
+            <div className="exp-block-card">
+              <img src="/oneamerica.png" alt="OneAmerica Financial" className="exp-block-logo" />
+              <h3 className="exp-block-title">Data Engineering Intern</h3>
+              <p className="exp-block-company">OneAmerica Financial</p>
+              <p className="exp-block-date">May 2025 - December 2025</p>
+            </div>
+            <div className="exp-block-dot" />
+          </div>
+
+          <div className="exp-block exp-right reveal-child">
+            <div className="exp-block-dot" />
+            <div className="exp-block-card">
+              <img src="/purdue.png" alt="Indiana University" className="exp-block-logo" />
+              <h3 className="exp-block-title">Undergraduate Student Researcher</h3>
+              <p className="exp-block-company">Video and Image Processing Laboratory (VIPER), Purdue University</p>
+              <p className="exp-block-date">August 2024 - December 2024</p>
             </div>
           </div>
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/company-3.png" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>OneAmerica Financial</h3>
-                  <p>Data Engineering Intern</p>
-                </div>
-                <span className="exp-date">May 2025 - December 2025</span>
-              </div>
-              <p className="exp-desc">Created internal tooling that reduced deployment time by 60%. Wrote comprehensive unit and integration tests for critical services.</p>
+
+          <div className="exp-block exp-left reveal-child">
+            <div className="exp-block-card">
+              <img src="/iu.jpg" alt="Company" className="exp-block-logo" />
+              <h3 className="exp-block-title">Research Assistant</h3>
+              <p className="exp-block-company">Computer Vision Lab, Indiana University Bloomington</p>
+              <p className="exp-block-date">June 2022 - September 2024</p>
             </div>
+            <div className="exp-block-dot" />
           </div>
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/company-4.png" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>Indiana University</h3>
-                  <p>Research Assistant</p>
-                </div>
-                <span className="exp-date">Spring 2023</span>
-              </div>
-              <p className="exp-desc">Description of work completed at this role.</p>
-            </div>
-          </div>
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/company-5.png" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>Company Name</h3>
-                  <p>Software Engineer Intern</p>
-                </div>
-                <span className="exp-date">Summer 2022</span>
-              </div>
-              <p className="exp-desc">Description of work completed at this role.</p>
-            </div>
-          </div>
-          <div className="exp-item reveal-child">
-            <div className="exp-connector" />
-            <div className="exp-content">
-              <div className="exp-header">
-                <img src="/company-6.png" alt="Company" className="exp-logo" />
-                <div>
-                  <h3>Company Name</h3>
-                  <p>Software Engineer Intern</p>
-                </div>
-                <span className="exp-date">Spring 2022</span>
-              </div>
-              <p className="exp-desc">Description of work completed at this role.</p>
+
+          <div className="exp-block exp-right reveal-child">
+            <div className="exp-block-dot" />
+            <div className="exp-block-card">
+              <img src="/galactech.png" alt="Company" className="exp-block-logo" />
+              <h3 className="exp-block-title">Lead Software Engineer</h3>
+              <p className="exp-block-company">FIRST Robotics Competition Team 4926</p>
+              <p className="exp-block-date">January 2021 - May 2024</p>
             </div>
           </div>
         </div>
@@ -422,52 +392,56 @@ function App() {
         <h2 className="section-title reveal-child">Projects</h2>
         <div ref={galleryRef} className="projects-gallery reveal-child">
           <div className="project-card">
-            <div className="project-img" />
+            <img src="/poke.png" alt="Project screenshot" className="project-img" />
             <div className="project-info">
-              <h3>Project Name</h3>
-              <p>A brief description of what this project does and the problem it solves.</p>
-              <div className="project-tags">
-                <span style={{ '--tag-color': '#61dafb' } as React.CSSProperties}>React</span>
-                <span style={{ '--tag-color': '#3178c6' } as React.CSSProperties}>TypeScript</span>
-                <span style={{ '--tag-color': '#68a063' } as React.CSSProperties}>Node.js</span>
-              </div>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="project-link">View on GitHub →</a>
-            </div>
-          </div>
-          <div className="project-card">
-            <div className="project-img" />
-            <div className="project-info">
-              <h3>Project Name</h3>
-              <p>A brief description of what this project does and the problem it solves.</p>
+              <h3>PokeRL</h3>
+              <p>Competitive Pokemon AI agent achieving a 60% win rate using Deep Q-Networks and Policy Gradient reinforcement learning methods.</p>
               <div className="project-tags">
                 <span style={{ '--tag-color': '#3776ab' } as React.CSSProperties}>Python</span>
-                <span style={{ '--tag-color': '#ff6f00' } as React.CSSProperties}>TensorFlow</span>
-                <span style={{ '--tag-color': '#ff9900' } as React.CSSProperties}>AWS</span>
+                <span style={{ '--tag-color': '#ff6f00' } as React.CSSProperties}>DQN</span>
+                <span style={{ '--tag-color': '#68a063' } as React.CSSProperties}>Node.js</span>
+                <span style={{ '--tag-color': '#e44d26' } as React.CSSProperties}>Poke-env</span>
               </div>
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="project-link">View on GitHub →</a>
             </div>
           </div>
           <div className="project-card">
-            <div className="project-img" />
+            <img src="/magma.png" alt="Project screenshot" className="project-img" />
             <div className="project-info">
-              <h3>Project Name</h3>
-              <p>A brief description of what this project does and the problem it solves.</p>
+              <h3>Magma Rush</h3>
+              <p>iOS mobile game with 100+ downloads across 4 countries, featuring AI-driven NPC behavior and optimized cross-device performance.</p>
               <div className="project-tags">
-                <span style={{ '--tag-color': '#dea584' } as React.CSSProperties}>Rust</span>
-                <span style={{ '--tag-color': '#654ff0' } as React.CSSProperties}>WebAssembly</span>
+                <span style={{ '--tag-color': '#68217a' } as React.CSSProperties}>Unity</span>
+                <span style={{ '--tag-color': '#f05138' } as React.CSSProperties}>Swift</span>
+                <span style={{ '--tag-color': '#239120' } as React.CSSProperties}>C#</span>
+                <span style={{ '--tag-color': '#147efb' } as React.CSSProperties}>iOS</span>
               </div>
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="project-link">View on GitHub →</a>
             </div>
           </div>
           <div className="project-card">
-            <div className="project-img" />
+            <img src="/project-3.png" alt="Project screenshot" className="project-img" />
             <div className="project-info">
-              <h3>Project Name</h3>
-              <p>A brief description of what this project does and the problem it solves.</p>
+              <h3>Solfit</h3>
+              <p>Fitness-to-crypto platform on Solana where users compete in workouts to earn tokens, using low-latency ESP32 networking for real-time device-to-web communication.</p>
               <div className="project-tags">
-                <span style={{ '--tag-color': '#00add8' } as React.CSSProperties}>Go</span>
-                <span style={{ '--tag-color': '#2496ed' } as React.CSSProperties}>Docker</span>
-                <span style={{ '--tag-color': '#326ce5' } as React.CSSProperties}>Kubernetes</span>
+                <span style={{ '--tag-color': '#9945ff' } as React.CSSProperties}>Solana</span>
+                <span style={{ '--tag-color': '#00979d' } as React.CSSProperties}>ESP32</span>
+                <span style={{ '--tag-color': '#61dafb' } as React.CSSProperties}>React</span>
+                <span style={{ '--tag-color': '#f7df1e' } as React.CSSProperties}>WebSockets</span>
+              </div>
+              <a href="https://pmxi.github.io/solfit/" target="_blank" rel="noopener noreferrer" className="project-link">View Live →</a>
+            </div>
+          </div>
+          <div className="project-card">
+            <img src="/project-4.png" alt="Project screenshot" className="project-img" />
+            <div className="project-info">
+              <h3>TypeShip</h3>
+              <p>Real-time social messaging app with client-server architecture, featuring user auth, friend systems, blocking, and live chat with message persistence.</p>
+              <div className="project-tags">
+                <span style={{ '--tag-color': '#f89820' } as React.CSSProperties}>Java</span>
+                <span style={{ '--tag-color': '#4e7896' } as React.CSSProperties}>Swing</span>
+                <span style={{ '--tag-color': '#336791' } as React.CSSProperties}>Networking</span>
               </div>
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="project-link">View on GitHub →</a>
             </div>
