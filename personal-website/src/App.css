@@ -985,3 +985,132 @@
   width: 20px;
   height: 20px;
 }
+
+/* ===== Mobile Responsiveness ===== */
+
+@media (max-width: 768px) {
+  /* Hide side timeline nav on mobile - it overlaps content */
+  .timeline-nav {
+    display: none;
+  }
+
+  /* Top nav: smaller gaps and font */
+  .nav {
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .nav a {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    letter-spacing: 1px;
+  }
+
+  /* Hero adjustments */
+  .hero {
+    padding: 1.5rem 1rem;
+  }
+
+  .avatar-placeholder {
+    width: 160px;
+    height: 160px;
+  }
+
+  .avatar-placeholder:hover {
+    width: 170px;
+    height: 170px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Sections: reduce padding */
+  .section,
+  .education {
+    padding: 4rem 1rem;
+  }
+
+  /* Projects: allow smaller cards on mobile */
+  .project-card {
+    min-width: 260px;
+    max-width: 260px;
+    height: 400px;
+  }
+
+  .projects-gallery {
+    padding: 0.5rem 1rem 1rem;
+    margin: 0 -1rem;
+  }
+
+  /* Contact */
+  .contact-layout {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Nav: even more compact */
+  .nav {
+    gap: 0.5rem;
+    padding: 0.6rem 0.5rem;
+  }
+
+  .nav a {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* Hero */
+  .avatar-placeholder {
+    width: 130px;
+    height: 130px;
+  }
+
+  .avatar-placeholder:hover {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+  }
+
+  /* Education */
+  .edu-img-placeholder {
+    height: 180px;
+  }
+
+  .clubs-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .club-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Experience cards */
+  .exp-block-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .exp-block-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Projects */
+  .project-card {
+    min-width: 240px;
+    max-width: 240px;
+    height: 380px;
+  }
+
+  .project-img {
+    height: 120px;
+  }
+}
